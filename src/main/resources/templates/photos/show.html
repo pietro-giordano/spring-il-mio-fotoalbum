@@ -7,7 +7,16 @@
 <div class="container">
       <nav th:replace="~{/fragments/navbar :: navbar(current='photos')}"></nav>
 
-
+      <div class="row">
+            <div th:object="${photo}" class="card" style="width: 18rem;">
+                  <img th:src="*{url}" class="card-img-top" th:alt="*{title}">
+                  <div class="card-body">
+                        <h5 th:text="*{title}" class="card-title"></h5>
+                        <p th:text="*{description}" class="card-text"></p>
+                        <a th:href="@{/photos}" class="btn btn-primary">Indietro</a>
+                  </div>
+            </div>
+      </div>
 </div>
 </body>
 </html>
