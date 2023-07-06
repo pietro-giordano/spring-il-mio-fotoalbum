@@ -38,4 +38,7 @@ public class PhotoController {
                   throw new RuntimeException("Foto non trovata");
             }
       }
+
+      // CREATE
+
 }
