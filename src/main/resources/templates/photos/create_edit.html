@@ -7,10 +7,10 @@
 <div class="container">
       <nav th:replace="~{/fragments/navbar :: navbar(current='photos')}"></nav>
 
-      <form th:action="@{${isEdit ? '/photos/edit/' + pizza.id : '/photos/create'}}" th:object="${photo}"
+      <form th:action="@{${isEdit ? '/photos/edit/' + photo.id : '/photos/create'}}" th:object="${photo}"
             id="photo_form" method="POST" enctype="multipart/form-data" class="row">
             <div class="mb-3 col-6">
-                  <label for="title" class="form-label bg-warning p-1 rounded">Nome pizza</label>
+                  <label for="title" class="form-label">Nome pizza</label>
                   <input type="text" class="form-control" id="title" th:field="*{title}"
                          th:errorClass="is-invalid">
                   <div th:if="${#fields.hasErrors('title')}" class="invalid-feedback">
@@ -20,7 +20,7 @@
                   </div>
             </div>
             <div class="mb-3">
-                  <label for="description" class="form-label bg-warning p-1 rounded">Descrizione</label>
+                  <label for="description" class="form-label">Descrizione</label>
                   <textarea class="form-control" id="description" th:field="*{description}" rows="6"
                             th:errorClass="is-invalid"></textarea>
                   <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
@@ -29,8 +29,8 @@
                         </ul>
                   </div>
             </div>
-            <div class="mb-3 col-6">
-                  <label for="url" class="form-label bg-warning p-1 rounded">Url</label>
+            <div class="mb-3">
+                  <label for="url" class="form-label">Url</label>
                   <input type="text" class="form-control" id="url" th:field="*{url}"
                          th:errorClass="is-invalid">
                   <div th:if="${#fields.hasErrors('url')}" class="invalid-feedback">
@@ -52,23 +52,30 @@
                   </div>
             </div>
             -->
+            <div class="mb-3">
+                  <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch"
+                               value="1" id="flexSwitchCheckChecked"
+                               name="available" th:checked="*{visible}">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Visibilità'</label>
+                  </div>
+            </div>
 
             <!-- checkbox categorie -->
-            <div class="card col-4">
-                  <div class="card-body">
-                        <span class="bg-warning p-1 rounded">Categorie</span>
-                        <div class="form-check mt-2" th:each="ingredient : ${ingredientList}">
-                              <input class="form-check-input" type="checkbox" th:value="${ingredient.id}" th:id="|ingredient_${ingredient.id}|"
-                                     th:field="*{ingredients}">
-                              <label class="form-check-label" th:for="|ingredient_${ingredient.id}|" th:text="${ingredient.name}">
-                              </label>
-                        </div>
+            <div class="col-4">
+                  <span>Categorie</span>
+                  <div class="form-check mt-2" th:each="category : ${categories}">
+                        <input class="form-check-input" type="checkbox" th:value="${category.id}" th:id="|category_${category.id}|"
+                               th:field="*{categories}">
+                        <label class="form-check-label" th:for="|category_${category.id}|" th:text="${category.name}">
+                        </label>
                   </div>
             </div>
 
             <div class="mt-3">
-                  <button class="btn btn-success px-3" type="submit">Crea</button>
-                  <a class="btn btn-primary px-3" th:href="@{/pizza}">Back</a>
+                  <button th:if="${photo.id == null}" class="btn btn-success px-3" type="submit">Crea</button>
+                  <button th:unless="${photo.id == null}" class="btn btn-warning px-3" type="submit">Modifica</button>
+                  <a class="btn btn-primary px-3" th:href="@{/photos}">Indietro</a>
             </div>
       </form>
 </div>

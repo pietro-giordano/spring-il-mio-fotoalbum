@@ -13,6 +13,10 @@
                   <div class="card-body">
                         <h5 th:text="*{title}" class="card-title"></h5>
                         <p th:text="*{description}" class="card-text"></p>
+
+                        <p th:if="*{visible}" class="card-text text-success" >Visibile</p>
+                        <p th:unless="*{visible}" class="card-text text-danger">Non visibile</p>
+
                         <a th:href="@{/photos}" class="btn btn-primary">Indietro</a>
                   </div>
             </div>

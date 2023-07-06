@@ -7,16 +7,20 @@
 <div class="container">
       <nav th:replace="~{/fragments/navbar :: navbar(current='photos')}"></nav>
 
-      <div class="row">
+      <div class="row d-flex justify-content-between p-3">
+            <a th:href="@{/photos/create}" class="btn btn-success col-2">
+                  Aggiungi foto
+            </a>
+
             <form class="d-flex col-4" role="search">
                   <input class="form-control me-2" type="search" name="keyword" th:value="${search}" placeholder="Filtra foto per nome..." aria-label="Search">
                   <button class="btn btn-outline-success" type="submit">Cerca</button>
             </form>
       </div>
 
-      <div class="row mt-3">
+      <div class="row mt-1">
             <div class="col-2"></div>
-            <ul th:if="${photos.size() > 0}" class="list-group list-group-flush col-8">
+            <ul th:if="${photos.size() > 0}" class="list-group list-group-flush">
                   <li th:each="photo : ${photos}" th:object="${photo}" class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
                               <div th:text="*{title}" class="fw-bold"></div>
@@ -27,7 +31,7 @@
                               <a th:href="@{/photos/{id}(id=${photo.id})}" class="btn btn-info">
                                     <i class="fa-solid fa-circle-info"></i>
                               </a>
-                              <a href="#" class="btn btn-warning">
+                              <a th:href="@{/photos/edit/{id}(id=${photo.id})}" class="btn btn-warning">
                                     <i class="fa-solid fa-pen"></i>
                               </a>
                         </div>

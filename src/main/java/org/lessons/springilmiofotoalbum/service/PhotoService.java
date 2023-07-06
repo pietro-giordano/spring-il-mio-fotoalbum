@@ -6,6 +6,7 @@ import org.lessons.springilmiofotoalbum.repository.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,5 +34,17 @@ public class PhotoService {
             } else {
                   return photo.get();
             }
+      }
+
+      // metodo che crea foto
+      public Photo create(Photo photo) {
+            Photo newPhoto = new Photo();
+            newPhoto.setCreatedAt(LocalDateTime.now());
+            newPhoto.setTitle(photo.getTitle());
+            newPhoto.setDescription(photo.getDescription());
+            newPhoto.setUrl(photo.getUrl());
+            newPhoto.setVisible(photo.getVisible());
+            newPhoto.setCategories(photo.getCategories());
+            return photoRepository.save(newPhoto);
       }
 }
