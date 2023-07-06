@@ -1,6 +1,7 @@
 package org.lessons.springilmiofotoalbum.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
@@ -12,10 +13,13 @@ public class Photo {
       @GeneratedValue(strategy = GenerationType.IDENTITY)
       private Integer id;
 
+      @NotBlank(message = "Titolo non può essere vuoto o nullo")
+      @Column(nullable = false)
       private String title;
+      @Lob
       private String description;
       private String url;
-      private Boolean visible;
+      private Boolean visible = true;
 
       @ManyToMany
       @JoinTable(name = "category_photo", joinColumns = @JoinColumn(name = "photo_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
