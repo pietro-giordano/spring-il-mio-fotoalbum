@@ -3,6 +3,7 @@ package org.lessons.springilmiofotoalbum.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -20,6 +21,7 @@ public class Photo {
       private String description;
       private String url;
       private Boolean visible = true;
+      private LocalDateTime createdAt;
 
       @ManyToMany
       @JoinTable(name = "category_photo", joinColumns = @JoinColumn(name = "photo_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
@@ -63,6 +65,14 @@ public class Photo {
 
       public void setVisible(Boolean visible) {
             this.visible = visible;
+      }
+
+      public LocalDateTime getCreatedAt() {
+            return createdAt;
+      }
+
+      public void setCreatedAt(LocalDateTime createdAt) {
+            this.createdAt = createdAt;
       }
 
       public List<Category> getCategories() {
