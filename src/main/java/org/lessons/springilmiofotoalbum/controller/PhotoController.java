@@ -80,9 +80,25 @@ public class PhotoController {
       public String update(@PathVariable Integer id, @Valid @ModelAttribute("photo") Photo formPhoto, BindingResult bindingResult, Model model) {
             if (bindingResult.hasErrors()) {
                   model.addAttribute("categories", categoryService.getCategories());
-                  return  "/photos/vreate_edit";
+                  return  "/photos/create_edit";
             }
-            photoService.update(formPhoto, id);
-            return "redirect:/photos";
+            try {
+                  photoService.update(formPhoto, id);
+                  return "redirect:/photos";
+            } catch (PhotoNotFoundException e) {
+                  throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            }
+
+      }
+
+      // DELETE
+      @PostMapping("/delete/{id}")
+      public String delete(@PathVariable Integer id) {
+            try {
+                  photoService.delete(id);
+                  return "redirect:/photos";
+            } catch (PhotoNotFoundException e) {
+                  throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            }
       }
 }

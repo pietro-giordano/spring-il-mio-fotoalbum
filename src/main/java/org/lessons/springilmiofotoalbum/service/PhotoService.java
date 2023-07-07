@@ -63,4 +63,10 @@ public class PhotoService {
             newPhoto.setCategories(fromPhoto.getCategories());
             return photoRepository.save(newPhoto);
       }
+
+      // metodo che cancella foto
+      public void delete(Integer id) throws PhotoNotFoundException {
+            Photo Photo = getPhotoById(id);
+            photoRepository.delete(Photo);
+      }
 }
