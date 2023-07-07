@@ -39,7 +39,9 @@ public class SecurityConfiguration {
       SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             http.authorizeHttpRequests()
                     .requestMatchers("/api/**").permitAll()
-                    .requestMatchers("/**").hasAuthority("ADMIN")
+                    .requestMatchers("/photos/**").hasAuthority("ADMIN")
+                    .requestMatchers("/categories/**").hasAuthority("ADMIN")
+                    .requestMatchers("/").permitAll()
                     .and().formLogin()
                     .and().logout();
             // disabilitiamo csrf per permettere chiamate api
