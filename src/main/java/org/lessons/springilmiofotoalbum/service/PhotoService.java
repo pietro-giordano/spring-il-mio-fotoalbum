@@ -25,6 +25,15 @@ public class PhotoService {
             }
       }
 
+      // metodo che restituisce lista foto filtrate per visibilità e per titolo
+      public List<Photo> getVisiblePhotos(Optional<String> search) {
+            if (search.isEmpty()) {
+                  return photoRepository.findByVisibleTrue();
+            } else {
+                  return photoRepository.findByVisibleTrueAndTitleContainingIgnoreCase(search.get());
+            }
+      }
+
       // metodo che ritorna foto cercata per id
       public Photo getPhotoById(Integer id) throws PhotoNotFoundException {
             Optional<Photo> photo = photoRepository.findById(id);
@@ -49,18 +58,18 @@ public class PhotoService {
       }
 
       // metodo che updata foto
-      public Photo update(Photo fromPhoto, Integer id) throws PhotoNotFoundException {
+      public Photo update(Photo formPhoto, Integer id) throws PhotoNotFoundException {
             // recupero foto precedente ad update
             Photo oldPhoto = getPhotoById(id);
             // creo foto post update
             Photo newPhoto = new Photo();
             newPhoto.setId(oldPhoto.getId());
             newPhoto.setCreatedAt(LocalDateTime.now());
-            newPhoto.setTitle(fromPhoto.getTitle());
-            newPhoto.setDescription(fromPhoto.getDescription());
-            newPhoto.setUrl(fromPhoto.getUrl());
-            newPhoto.setVisible(fromPhoto.getVisible());
-            newPhoto.setCategories(fromPhoto.getCategories());
+            newPhoto.setTitle(formPhoto.getTitle());
+            newPhoto.setDescription(formPhoto.getDescription());
+            newPhoto.setUrl(formPhoto.getUrl());
+            newPhoto.setVisible(formPhoto.getVisible());
+            newPhoto.setCategories(formPhoto.getCategories());
             return photoRepository.save(newPhoto);
       }
 

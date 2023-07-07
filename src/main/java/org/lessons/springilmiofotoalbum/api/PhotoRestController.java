@@ -18,6 +18,6 @@ public class PhotoRestController {
 
       @GetMapping
       public List<Photo> index(@RequestParam(name = "keyword", required = false) Optional<String> search) {
-            return photoService.getPhotos(search);
+            return photoService.getVisiblePhotos(search);
       }
 }

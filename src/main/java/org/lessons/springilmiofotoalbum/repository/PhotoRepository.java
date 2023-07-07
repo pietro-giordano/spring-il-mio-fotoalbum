@@ -7,5 +7,8 @@ import java.util.List;
 
 public interface PhotoRepository extends JpaRepository<Photo, Integer> {
 
-      List<Photo> findByTitleContainingIgnoreCase(String name);
+      List<Photo> findByTitleContainingIgnoreCase(String title);
+
+      List<Photo> findByVisibleTrue();
+      List<Photo> findByVisibleTrueAndTitleContainingIgnoreCase(String title);
 }
