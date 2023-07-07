@@ -41,7 +41,7 @@ public class SecurityConfiguration {
                     .requestMatchers("/api/**").permitAll()
                     .requestMatchers("/photos/**").hasAuthority("ADMIN")
                     .requestMatchers("/categories/**").hasAuthority("ADMIN")
-                    .requestMatchers("/").permitAll()
+                    .requestMatchers("/**").permitAll()
                     .and().formLogin()
                     .and().logout();
             // disabilitiamo csrf per permettere chiamate api

@@ -1,9 +1,22 @@
 <script>
-import axios from 'axios'
+import Navbar from './components/Navbar.vue';
+import Homepage from './components/Homepage.vue';
+
+export default {
+      name: 'App',
+      components: {
+            Navbar,
+            Homepage
+      }
+}
 </script>
 
-<template></template>
+<template>
+      <Navbar />
+
+      <Homepage />
+</template>
 
 <style lang="scss">
-@import './styles/styles.scss';
+@import './styles/main.scss';
 </style>

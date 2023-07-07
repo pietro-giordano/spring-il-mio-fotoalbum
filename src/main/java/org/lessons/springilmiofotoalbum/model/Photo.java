@@ -20,7 +20,7 @@ public class Photo {
       @Lob
       private String description;
       private String url;
-      private Boolean visible = true;
+      private Boolean visible;
       private LocalDateTime createdAt;
 
       @ManyToMany
