@@ -7,8 +7,8 @@
 <div class="container">
       <nav th:replace="~{/fragments/navbar :: navbar(current='photos')}"></nav>
 
-      <div class="row">
-            <div th:object="${photo}" class="card" style="width: 18rem;">
+      <div class="row d-flex justify-content-around">
+            <div th:object="${photo}" class="card w-25 mt-5 p-3">
                   <img th:src="*{url}" class="card-img-top" th:alt="*{title}">
                   <div class="card-body">
                         <h5 th:text="*{title}" class="card-title"></h5>

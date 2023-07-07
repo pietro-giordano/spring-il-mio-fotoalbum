@@ -6,6 +6,7 @@ export default {
       data() {
             return {
                   api: 'http://localhost:8080/api/',
+                  search: "",
                   photos: []
             }
       },
@@ -17,15 +18,35 @@ export default {
                         console.log(response.data);
                         this.photos = response.data;
                   })
+      },
+      methods: {
+
+            input() {
+                  axios
+                        .get(this.api + 'photos', {
+                              params: {
+                                    name: this.search
+                              }
+                        })
+                        .then(response => {
+                              console.log(response.data);
+                              this.photos = response.data;
+                        })
+            }
       }
 }
 </script>
 
 <template>
       <div class="container">
-            <div class="row mt-3">
-                  <div v-for="photo in photos" class="col-3">
-                        <div class="card">
+            <div class="col-4">
+                  <input v-model="search" @keyup="input()" class="form-control me-2" type="text"
+                        placeholder="Filtra foto per nome...">
+            </div>
+
+            <div class="row mt-3 d-flex">
+                  <div v-for="photo in photos" class="col-3 mb-4">
+                        <div class="card p-3" style="height: 350px;">
                               <img :src="photo.url" class="card-img-top" :alt="photo.title">
                               <div class="card-body">
                                     <h5 class="card-title">{{ photo.title }}</h5>
