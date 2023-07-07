@@ -4,11 +4,11 @@ INSERT INTO `photos`(`title`, `url`, `description`, `created_at`, `visible`) VAL
 INSERT INTO `photos`(`title`, `url`, `description`, `created_at`, `visible`) VALUES ('foto 4','/img/capolavoro4.jpg','Foto generata da intelligenza artificiale', '2023-07-06 12:07:00', true)
 INSERT INTO `photos`(`title`, `url`, `description`, `created_at`, `visible`) VALUES ('foto 5','/img/capolavoro5.jpg','Foto generata da intelligenza artificiale', '2023-07-06 12:07:00', true)
 
-INSERT INTO `categories`(`name`) VALUES ('Natura')
-INSERT INTO `categories`(`name`) VALUES ('Mare')
-INSERT INTO `categories`(`name`) VALUES ('Montagna')
-INSERT INTO `categories`(`name`) VALUES ('Città')
-INSERT INTO `categories`(`name`) VALUES ('Monumenti')
+INSERT INTO `categories`(`name`, `created_at`) VALUES ('Natura', '2023-07-06 12:07:00')
+INSERT INTO `categories`(`name`, `created_at`) VALUES ('Mare', '2023-07-06 12:07:00')
+INSERT INTO `categories`(`name`, `created_at`) VALUES ('Montagna', '2023-07-06 12:07:00')
+INSERT INTO `categories`(`name`, `created_at`) VALUES ('Città', '2023-07-06 12:07:00')
+INSERT INTO `categories`(`name`, `created_at`) VALUES ('Monumenti', '2023-07-06 12:07:00')
 
 INSERT INTO `category_photo`(`category_id`, `photo_id`) VALUES ('1','1')
 INSERT INTO `category_photo`(`category_id`, `photo_id`) VALUES ('3','1')
@@ -22,4 +22,9 @@ INSERT INTO `category_photo`(`category_id`, `photo_id`) VALUES ('5','4')
 INSERT INTO `category_photo`(`category_id`, `photo_id`) VALUES ('1','5')
 INSERT INTO `category_photo`(`category_id`, `photo_id`) VALUES ('3','5')
 INSERT INTO `category_photo`(`category_id`, `photo_id`) VALUES ('4','5')
+
+INSERT INTO `users`(`password`, `username`) VALUES ('{noop}admin','admin')
+INSERT INTO `roles`(`name`) VALUES ('ADMIN')
+INSERT INTO `users_roles`(`user_id`, `roles_id`) VALUES (1, 1)
+
 
