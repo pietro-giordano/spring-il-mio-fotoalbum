@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -39,7 +40,7 @@ public class PhotoController {
                   model.addAttribute("photo", photoService.getPhotoById(id));
                   return "/photos/show";
             } catch (PhotoNotFoundException e) {
-                  throw new RuntimeException("Foto non trovata");
+                  throw new ResponseStatusException(HttpStatus.NOT_FOUND);
             }
       }
 
@@ -59,12 +60,29 @@ public class PhotoController {
                   return "/photos/create_edit";
             }
             photoService.create(formPhoto);
-            return "redirect:photos";
+            return "redirect:/photos";
       }
 
       // EDIT
       @GetMapping("/edit/{id}")
-      public String edit(@PathVariable Integer id) {
-            return "/photos/create_edit";
+      public String edit(@PathVariable Integer id, Model model) {
+            try {
+                  model.addAttribute("photo", photoService.getPhotoById(id));
+                  model.addAttribute("categories", categoryService.getCategories());
+                  return "/photos/create_edit";
+            } catch (PhotoNotFoundException e) {
+                  throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            }
+      }
+
+      // UPDATE
+      @PostMapping("/edit/{id}")
+      public String update(@PathVariable Integer id, @Valid @ModelAttribute("photo") Photo formPhoto, BindingResult bindingResult, Model model) {
+            if (bindingResult.hasErrors()) {
+                  model.addAttribute("categories", categoryService.getCategories());
+                  return  "/photos/vreate_edit";
+            }
+            photoService.update(formPhoto, id);
+            return "redirect:/photos";
       }
 }

@@ -47,4 +47,20 @@ public class PhotoService {
             newPhoto.setCategories(photo.getCategories());
             return photoRepository.save(newPhoto);
       }
+
+      // metodo che updata foto
+      public Photo update(Photo fromPhoto, Integer id) throws PhotoNotFoundException {
+            // recupero foto precedente ad update
+            Photo oldPhoto = getPhotoById(id);
+            // creo foto post update
+            Photo newPhoto = new Photo();
+            newPhoto.setId(oldPhoto.getId());
+            newPhoto.setCreatedAt(LocalDateTime.now());
+            newPhoto.setTitle(fromPhoto.getTitle());
+            newPhoto.setDescription(fromPhoto.getDescription());
+            newPhoto.setUrl(fromPhoto.getUrl());
+            newPhoto.setVisible(fromPhoto.getVisible());
+            newPhoto.setCategories(fromPhoto.getCategories());
+            return photoRepository.save(newPhoto);
+      }
 }

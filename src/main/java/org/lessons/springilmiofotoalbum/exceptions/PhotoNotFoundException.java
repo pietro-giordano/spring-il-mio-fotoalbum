@@ -1,4 +1,4 @@
 package org.lessons.springilmiofotoalbum.exceptions;
 
-public class PhotoNotFoundException extends Exception {
+public class PhotoNotFoundException extends RuntimeException {
 }
