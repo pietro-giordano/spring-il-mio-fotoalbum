@@ -10,7 +10,7 @@
       <form th:action="@{${isEdit ? '/photos/edit/' + photo.id : '/photos/create'}}" th:object="${photo}"
             id="photo_form" method="POST" enctype="multipart/form-data" class="row">
             <div class="mb-3 col-6">
-                  <label for="title" class="form-label">Nome pizza</label>
+                  <label for="title" class="form-label">Titolo foto</label>
                   <input type="text" class="form-control" id="title" th:field="*{title}"
                          th:errorClass="is-invalid">
                   <div th:if="${#fields.hasErrors('title')}" class="invalid-feedback">
