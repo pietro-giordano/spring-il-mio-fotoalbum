@@ -1,6 +1,7 @@
 package org.lessons.springilmiofotoalbum.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,6 +14,8 @@ public class Category {
       @GeneratedValue(strategy = GenerationType.IDENTITY)
       private Integer id;
 
+      @NotBlank
+      @Column(nullable = false)
       private String name;
       private LocalDateTime createdAt;
 
