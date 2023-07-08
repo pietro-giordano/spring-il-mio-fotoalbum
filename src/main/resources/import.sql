@@ -1,8 +1,8 @@
-INSERT INTO `photos`(`title`, `url`, `description`, `created_at`, `visible`) VALUES ('foto 1','/img/capolavoro1.jpg','Foto generata da intelligenza artificiale', '2023-07-06 12:07:00', true)
-INSERT INTO `photos`(`title`, `url`, `description`, `created_at`, `visible`) VALUES ('foto 2','/img/capolavoro2.jpg','Foto generata da intelligenza artificiale', '2023-07-06 12:07:00', true)
-INSERT INTO `photos`(`title`, `url`, `description`, `created_at`, `visible`) VALUES ('foto 3','/img/capolavoro3.jpg','Foto generata da intelligenza artificiale', '2023-07-06 12:07:00', true)
-INSERT INTO `photos`(`title`, `url`, `description`, `created_at`, `visible`) VALUES ('foto 4','/img/capolavoro4.jpg','Foto generata da intelligenza artificiale', '2023-07-06 12:07:00', true)
-INSERT INTO `photos`(`title`, `url`, `description`, `created_at`, `visible`) VALUES ('foto 5','/img/capolavoro5.jpg','Foto generata da intelligenza artificiale', '2023-07-06 12:07:00', true)
+INSERT INTO `photos`(`title`, `description`, `created_at`, `visible`) VALUES ('foto 1','Foto generata da intelligenza artificiale', '2023-07-06 12:07:00', true)
+INSERT INTO `photos`(`title`, `description`, `created_at`, `visible`) VALUES ('foto 2','Foto generata da intelligenza artificiale', '2023-07-06 12:07:00', true)
+INSERT INTO `photos`(`title`, `description`, `created_at`, `visible`) VALUES ('foto 3','Foto generata da intelligenza artificiale', '2023-07-06 12:07:00', true)
+INSERT INTO `photos`(`title`, `description`, `created_at`, `visible`) VALUES ('foto 4','Foto generata da intelligenza artificiale', '2023-07-06 12:07:00', true)
+INSERT INTO `photos`(`title`, `description`, `created_at`, `visible`) VALUES ('foto 5','Foto generata da intelligenza artificiale', '2023-07-06 12:07:00', true)
 
 INSERT INTO `categories`(`name`, `created_at`) VALUES ('Natura', '2023-07-06 12:07:00')
 INSERT INTO `categories`(`name`, `created_at`) VALUES ('Mare', '2023-07-06 12:07:00')

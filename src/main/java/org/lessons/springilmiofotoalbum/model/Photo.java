@@ -19,7 +19,9 @@ public class Photo {
       private String title;
       @Lob
       private String description;
-      private String url;
+      @Lob
+      @Column(length = 16777215)
+      private byte[] url;
       private Boolean visible;
       private LocalDateTime createdAt;
 
@@ -51,11 +53,11 @@ public class Photo {
             this.description = description;
       }
 
-      public String getUrl() {
+      public byte[] getUrl() {
             return url;
       }
 
-      public void setUrl(String url) {
+      public void setUrl(byte[] url) {
             this.url = url;
       }
 
