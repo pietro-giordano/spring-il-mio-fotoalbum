@@ -89,8 +89,8 @@ export default {
 
             <div class="row mt-3 d-flex">
                   <div v-for="photo in photos" class="col-3 mb-4">
-                        <div class="card p-3" style="height: 350px;">
-                              <img :src="photo.url" class="card-img-top" :alt="photo.title">
+                        <div class="card p-3">
+                              <img :src="`${api}files/image/${photo.id}`" class="card-img-top" :alt="photo.title">
                               <div class="card-body">
                                     <h5 class="card-title">{{ photo.title }}</h5>
                                     <p class="card-text">{{ photo.description }}</p>
