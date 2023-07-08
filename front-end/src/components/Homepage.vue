@@ -85,19 +85,17 @@ export default {
                   </div>
                   <div class="offcanvas-body">
 
-                        <form action="POST">
-                              <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Indirizzo email</label>
-                                    <input v-model="message.email" type="email" class="form-control"
-                                          id="exampleFormControlInput1" placeholder="name@example.com">
-                              </div>
-                              <div class="mb-3">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Testo messaggio</label>
-                                    <textarea v-model="message.text" class="form-control" id="exampleFormControlTextarea1"
-                                          rows="10"></textarea>
-                              </div>
-                              <button @click="postMessage" type="submit" class="btn btn-primary">Invia</button>
-                        </form>
+                        <div class="mb-3">
+                              <label for="exampleFormControlInput1" class="form-label">Indirizzo email</label>
+                              <input v-model="message.email" type="email" class="form-control" id="exampleFormControlInput1"
+                                    placeholder="name@example.com">
+                        </div>
+                        <div class="mb-3">
+                              <label for="exampleFormControlTextarea1" class="form-label">Testo messaggio</label>
+                              <textarea v-model="message.text" class="form-control" id="exampleFormControlTextarea1"
+                                    rows="10"></textarea>
+                        </div>
+                        <button @click="postMessage" class="btn btn-primary">Invia</button>
 
                   </div>
             </div>
