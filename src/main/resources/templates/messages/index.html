@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+      <th:block th:replace="~{/fragments/resources :: head(title='Album Fotografico')}"></th:block>
+</head>
+<body>
+<div class="container">
+      <nav th:replace="~{/fragments/navbar :: navbar(current='photos')}"></nav>
+
+      <div class="row">
+            <!-- in caso non ci siano messaggi -->
+            <div class="alert alert-info" th:unless="${messages.size() > 0}">
+                  Nessun messaggio presente
+            </div>
+
+            <div class="accordion" id="accordionExample">
+                  <div th:each="message : ${messages}" th:object="${message}" class="accordion-item">
+                        <h2 class="accordion-header">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" th:data-bs-target="|#collapse*{id}|" aria-expanded="true" th:aria-controls="|collapse*{id}|">
+                                    [[*{email}]]
+                              </button>
+                        </h2>
+                        <div th:id="|collapse*{id}|" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                              <div th:text="*{text}" class="accordion-body"></div>
+                        </div>
+                  </div>
+            </div>
+      </div>
+</div>
+</body>
+</html>

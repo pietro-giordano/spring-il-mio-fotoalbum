@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class MessageService {
@@ -20,5 +21,10 @@ public class MessageService {
             newMessage.setEmail(formMessage.getEmail());
             newMessage.setText(formMessage.getText());
             return messageRepository.save(newMessage);
+      }
+
+      // metodo che restituisce lista messaggi
+      public List<Message> getMessages() {
+            return messageRepository.findAll();
       }
 }
