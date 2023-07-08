@@ -29,6 +29,7 @@
                         </ul>
                   </div>
             </div>
+            <!-- field per url stringa
             <div class="mb-3">
                   <label for="url" class="form-label">Url</label>
                   <input type="text" class="form-control" id="url" th:field="*{url}"
@@ -39,19 +40,19 @@
                         </ul>
                   </div>
             </div>
-
-            <!--
+            -->
+            <!-- field per url file -->
             <div class="mb-3">
-                  <label for="image" class="form-label bg-warning p-1 rounded">Immagine</label>
-                  <input type="file" class="form-control" id="image" th:field="*{url}"
+                  <label for="url" class="form-label">Immagine</label>
+                  <input type="file" class="form-control" id="url" th:field="*{url}"
                         th:errorClass="is-invalid">
                   <div th:if="${#fields.hasErrors('url')}" class="invalid-feedback">
                         <ul>
-                              <li th:each="err : ${#fields.errors('image')}" th:text="${err}"></li>
+                              <li th:each="err : ${#fields.errors('url')}" th:text="${err}"></li>
                         </ul>
                   </div>
             </div>
-            -->
+
             <div class="mb-3">
                   <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" role="switch"
