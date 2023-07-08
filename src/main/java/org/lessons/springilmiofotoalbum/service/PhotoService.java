@@ -91,7 +91,7 @@ public class PhotoService {
             return create(newPhoto);
       }
 
-      // metodo che updata foto
+      // metodo che updata foto da Photo
       public Photo update(Photo formPhoto, Integer id) throws PhotoNotFoundException {
             // recupero foto precedente ad update
             Photo oldPhoto = getPhotoById(id);
@@ -105,6 +105,12 @@ public class PhotoService {
             newPhoto.setVisible(formPhoto.getVisible());
             newPhoto.setCategories(formPhoto.getCategories());
             return photoRepository.save(newPhoto);
+      }
+
+      // metodo che update foto da PhotoDto
+      public Photo update(PhotoDto photoDto, Integer id) {
+            Photo newPhoto = convert(photoDto);
+            return update(newPhoto, newPhoto.getId());
       }
 
       // metodo che cancella foto

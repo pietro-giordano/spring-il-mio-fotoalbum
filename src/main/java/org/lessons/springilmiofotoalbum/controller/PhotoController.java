@@ -82,7 +82,7 @@ public class PhotoController {
 
       // UPDATE
       @PostMapping("/edit/{id}")
-      public String update(@PathVariable Integer id, @Valid @ModelAttribute("photo") Photo formPhoto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+      public String update(@PathVariable Integer id, @Valid @ModelAttribute("photo") PhotoDto formPhoto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
             if (bindingResult.hasErrors()) {
                   model.addAttribute("categories", categoryService.getCategories());
                   return  "/photos/create_edit";
