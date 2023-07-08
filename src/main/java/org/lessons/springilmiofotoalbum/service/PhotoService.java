@@ -1,11 +1,14 @@
 package org.lessons.springilmiofotoalbum.service;
 
+import org.lessons.springilmiofotoalbum.dto.PhotoDto;
 import org.lessons.springilmiofotoalbum.exceptions.PhotoNotFoundException;
 import org.lessons.springilmiofotoalbum.model.Photo;
 import org.lessons.springilmiofotoalbum.repository.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -45,7 +48,32 @@ public class PhotoService {
             }
       }
 
-      // metodo che crea foto
+      // metodo che trasforma PhotoDto in Photo
+      private Photo convert(PhotoDto photoDto) {
+            Photo convertedPhoto = new Photo();
+            convertedPhoto.setId(photoDto.getId());
+            convertedPhoto.setTitle(photoDto.getTitle());
+            convertedPhoto.setDescription(photoDto.getDescription());
+            convertedPhoto.setVisible(photoDto.getVisible());
+            convertedPhoto.setCategories(photoDto.getCategories());
+            convertedPhoto.setUrl(mpfToBytes(photoDto.getUrl()));
+            return convertedPhoto;
+      }
+
+      // metodo che trasforma multipartFile in bytes[]
+      private byte[] mpfToBytes(MultipartFile mpf) {
+            byte[] bytes = null;
+            if (mpf != null && !mpf.isEmpty()) {
+                  try {
+                        bytes = mpf.getBytes();
+                  } catch (IOException e) {
+                        throw new RuntimeException(e);
+                  }
+            }
+            return bytes;
+      }
+
+      // metodo che crea nuova foto da Photo
       public Photo create(Photo photo) {
             Photo newPhoto = new Photo();
             newPhoto.setCreatedAt(LocalDateTime.now());
@@ -55,6 +83,12 @@ public class PhotoService {
             newPhoto.setVisible(photo.getVisible());
             newPhoto.setCategories(photo.getCategories());
             return photoRepository.save(newPhoto);
+      }
+
+      // metodo che crea nuova foto da PhotoDto
+      public Photo create(PhotoDto photoDto) {
+            Photo newPhoto = convert(photoDto);
+            return create(newPhoto);
       }
 
       // metodo che updata foto

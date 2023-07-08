@@ -1,6 +1,7 @@
 package org.lessons.springilmiofotoalbum.controller;
 
 import jakarta.validation.Valid;
+import org.lessons.springilmiofotoalbum.dto.PhotoDto;
 import org.lessons.springilmiofotoalbum.exceptions.PhotoNotFoundException;
 import org.lessons.springilmiofotoalbum.messages.Alert;
 import org.lessons.springilmiofotoalbum.messages.AlertType;
@@ -50,14 +51,14 @@ public class PhotoController {
       // CREATE
       @GetMapping("/create")
       public String create(Model model) {
-            model.addAttribute("photo", new Photo());
+            model.addAttribute("photo", new PhotoDto());
             model.addAttribute("categories", categoryService.getCategories());
             return "/photos/create_edit";
       }
 
       // STORE
       @PostMapping("/create")
-      public String store(@Valid @ModelAttribute("photo") Photo formPhoto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+      public String store(@Valid @ModelAttribute("photo") PhotoDto formPhoto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
             if (bindingResult.hasErrors()) {
                   model.addAttribute("categories", categoryService.getCategories());
                   return "/photos/create_edit";
