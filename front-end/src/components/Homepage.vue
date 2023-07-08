@@ -52,10 +52,12 @@ export default {
                                     this.message.text = "";
                                     this.modalMessage = "Messaggio inviato correttamente";
                                     this.openModal();
-                              } else if (response.status == 400) {
-                                    this.modalMessage = "Errore nel invio del messaggio! Controllare che i campi siano correttamente compilati";
-                                    this.openModal();
                               }
+                        })
+                        .catch(error => {
+                              console.log(error);
+                              this.modalMessage = "Errore nel invio del messaggio! Controllare che i campi siano correttamente compilati";
+                              this.openModal();
                         })
             },
 
