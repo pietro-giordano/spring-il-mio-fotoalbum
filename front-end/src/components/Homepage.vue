@@ -11,7 +11,8 @@ export default {
                   message: {
                         email: "",
                         text: ""
-                  }
+                  },
+                  modalMessage: ""
             }
       },
       created() {
@@ -45,8 +46,33 @@ export default {
                               text: this.message.text
                         })
                         .then(response => {
-                              console.log(response)
+                              console.log(response);
+                              if (response.status == 200) {
+                                    this.message.email = "";
+                                    this.message.text = "";
+                                    this.modalMessage = "Messaggio inviato correttamente";
+                                    this.openModal();
+                              } else if (response.status == 400) {
+                                    this.modalMessage = "Errore nel invio del messaggio! Controllare che i campi siano correttamente compilati";
+                                    this.openModal();
+                              }
                         })
+            },
+
+            // metodo per visualizzare messaggio ad invio messaggio
+            openModal() {
+                  const modal = document.getElementById('exampleModal');
+                  modal.classList.add('show');
+                  modal.setAttribute('aria-hidden', 'false');
+                  modal.style.display = 'block';
+            },
+
+            // metodo per chiudere il modale
+            closeModal() {
+                  const modal = document.getElementById('exampleModal');
+                  modal.classList.remove('show');
+                  modal.setAttribute('aria-hidden', 'true');
+                  modal.style.display = 'none';
             }
       }
 }
@@ -85,18 +111,36 @@ export default {
                   </div>
                   <div class="offcanvas-body">
 
-                        <div class="mb-3">
-                              <label for="exampleFormControlInput1" class="form-label">Indirizzo email</label>
-                              <input v-model="message.email" type="email" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="name@example.com">
-                        </div>
-                        <div class="mb-3">
-                              <label for="exampleFormControlTextarea1" class="form-label">Testo messaggio</label>
-                              <textarea v-model="message.text" class="form-control" id="exampleFormControlTextarea1"
-                                    rows="10"></textarea>
-                        </div>
-                        <button @click="postMessage" class="btn btn-primary">Invia</button>
+                        <form @submit.prevent>
+                              <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Indirizzo email</label>
+                                    <input v-model="message.email" type="email" class="form-control"
+                                          id="exampleFormControlInput1" placeholder="name@example.com">
+                              </div>
+                              <div class="mb-3">
+                                    <label for="exampleFormControlTextarea1" class="form-label">Testo messaggio</label>
+                                    <textarea v-model="message.text" class="form-control" id="exampleFormControlTextarea1"
+                                          rows="10"></textarea>
+                              </div>
+                              <button @click="postMessage" class="btn btn-primary">Invia</button>
+                        </form>
 
+                  </div>
+            </div>
+
+            <!-- modale invio messaggio avvenuto correttamente -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                        <div class="modal-content">
+                              <div class="modal-body text-center pt-4"
+                                    :class="modalMessage == 'Messaggio inviato correttamente' ? 'text-success' : 'text-danger'">
+                                    {{ modalMessage }}
+                              </div>
+                              <div class="modal-footer">
+                                    <button @click="closeModal" type="button" class="btn btn-secondary"
+                                          data-bs-dismiss="modal">Close</button>
+                              </div>
+                        </div>
                   </div>
             </div>
       </div>

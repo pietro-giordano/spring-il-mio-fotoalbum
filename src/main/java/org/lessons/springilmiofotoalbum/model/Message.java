@@ -16,6 +16,8 @@ public class Message {
       @NotBlank
       @Column(nullable = false)
       private String email;
+      @NotBlank
+      @Column(nullable = false)
       @Lob
       private String text;
       private LocalDateTime createdAt;
