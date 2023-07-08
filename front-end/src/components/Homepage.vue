@@ -7,7 +7,11 @@ export default {
             return {
                   api: 'http://localhost:8080/api/',
                   search: "",
-                  photos: []
+                  photos: [],
+                  message: {
+                        email: "",
+                        text: ""
+                  }
             }
       },
       created() {
@@ -31,6 +35,17 @@ export default {
                         .then(response => {
                               console.log(response.data);
                               this.photos = response.data;
+                        })
+            },
+
+            postMessage() {
+                  axios
+                        .post(this.api + 'messages', {
+                              email: this.message.email,
+                              text: this.message.text
+                        })
+                        .then(response => {
+                              console.log(response)
                         })
             }
       }
@@ -73,14 +88,15 @@ export default {
                         <form action="POST">
                               <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Indirizzo email</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1"
-                                          placeholder="name@example.com">
+                                    <input v-model="message.email" type="email" class="form-control"
+                                          id="exampleFormControlInput1" placeholder="name@example.com">
                               </div>
                               <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label">Testo messaggio</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+                                    <textarea v-model="message.text" class="form-control" id="exampleFormControlTextarea1"
+                                          rows="10"></textarea>
                               </div>
-                              <button type="submit" class="btn btn-primary">Invia</button>
+                              <button @click="postMessage" type="submit" class="btn btn-primary">Invia</button>
                         </form>
 
                   </div>
