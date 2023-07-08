@@ -14,7 +14,7 @@ public class MessageRestController {
       @Autowired
       private MessageService messageService;
 
-      @GetMapping
+      @PostMapping
       public Message create(@Valid @RequestBody Message message) {
             return messageService.create(message);
       }
