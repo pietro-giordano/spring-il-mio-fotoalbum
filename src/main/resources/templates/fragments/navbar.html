@@ -12,7 +12,7 @@
                     aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
                   <ul class="navbar-nav">
                         <!-- nei link appendo la classe active se l'area corrisponde a quella del link -->
                         <li class="nav-item">
@@ -28,6 +28,7 @@
                                  th:classappend="${current == 'messages' ? 'active' : ''}">Messaggi</a>
                         </li>
                   </ul>
+                  <a href="/logout" class="btn btn-secondary">Logout</a>
             </div>
       </div>
 </nav>

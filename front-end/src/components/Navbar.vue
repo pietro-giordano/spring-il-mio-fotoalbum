@@ -15,12 +15,12 @@ export default {
                   </button>
                   <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
                         <ul class="navbar-nav">
-                              <li class="nav-item">
-                                    <a class="nav-link" href="http://localhost:8080">Area riservata</a>
-                              </li>
                               <li class="nav-item nav-link" role='button' data-bs-toggle="offcanvas"
                                     data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                                     Contattami
+                              </li>
+                              <li class="nav-item">
+                                    <a class="nav-link" href="http://localhost:8080">Area riservata</a>
                               </li>
                         </ul>
                   </div>
