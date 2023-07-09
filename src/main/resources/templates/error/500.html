@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+      <th:block th:replace="~{/fragments/resources :: head(title='Album Fotografico')}"></th:block>
+</head>
+<body>
+<div class="container">
+      <h1><span class="label label-default">Internal Server Error - 500</span></h1>
+
+      <p>There is a problem with resource you are looking for, and it cannot be displayed.</p>
+      <table class="table table-bordered table-striped">
+            <tr>
+                  <td>Timestamp</td>
+                  <td th:text="${timestamp}">Timestamp</td>
+            </tr>
+            <tr>
+                  <td>Path</td>
+                  <td th:text="${path}">Path</td>
+            </tr>
+            <tr>
+                  <td>Status</td>
+                  <td th:text="${status}">Status</td>
+            </tr>
+            <tr>
+                  <td>Error</td>
+                  <td th:text="${error}">Error</td>
+            </tr>
+            <tr>
+                  <td>Message</td>
+                  <td th:text="${message}">Message</td>
+            </tr>
+      </table>
+</div>
+</body>
+</html>
