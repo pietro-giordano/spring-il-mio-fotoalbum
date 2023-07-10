@@ -38,14 +38,14 @@ public class PhotoService {
       // metodo che recupera lista foto dell'utente loggato filtrate per titolo
       public List<Photo> getPhotosOfLoggedUser(Optional<String> search) {
             if (search.isEmpty()) {
-                  return photoRepository.findByUserId(userId().get().getId());
+                  return photoRepository.findByUserId(userLogged().get().getId());
             } else {
-                  return photoRepository.findByUserIdAndTitleContainingIgnoreCase(userId().get().getId(), search.get());
+                  return photoRepository.findByUserIdAndTitleContainingIgnoreCase(userLogged().get().getId(), search.get());
             }
       }
 
-      // recupero id user da username preso tramite authentication
-      private Optional<User> userId() {
+      // recupero user da username preso tramite authentication
+      private Optional<User> userLogged() {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             return userRepository.findByUsername(authentication.getName());
       }
@@ -62,6 +62,7 @@ public class PhotoService {
       // metodo che ritorna foto cercata per id
       public Photo getPhotoById(Integer id) throws PhotoNotFoundException {
             Optional<Photo> photo = photoRepository.findById(id);
+            permitted(photo, "vedere");
             // se non esiste lancia eccezione
             if (photo.isEmpty()) {
                   throw new PhotoNotFoundException();
@@ -98,6 +99,8 @@ public class PhotoService {
       // metodo che crea nuova foto da Photo
       public Photo create(Photo photo) {
             Photo newPhoto = new Photo();
+            // setto user loggato durante la creazione di una nuova foto
+            newPhoto.setUser(userLogged().get());
             newPhoto.setCreatedAt(LocalDateTime.now());
             newPhoto.setTitle(photo.getTitle());
             newPhoto.setDescription(photo.getDescription());
@@ -117,8 +120,11 @@ public class PhotoService {
       public Photo update(Photo formPhoto, Integer id) throws PhotoNotFoundException {
             // recupero foto precedente ad update
             Photo oldPhoto = getPhotoById(id);
+            //
+            permitted(oldPhoto, "modificare");
             // creo foto post update
             Photo newPhoto = new Photo();
+            newPhoto.setUser(oldPhoto.getUser());
             newPhoto.setId(oldPhoto.getId());
             newPhoto.setCreatedAt(LocalDateTime.now());
             newPhoto.setTitle(formPhoto.getTitle());
@@ -138,6 +144,21 @@ public class PhotoService {
       // metodo che cancella foto
       public void delete(Integer id) throws PhotoNotFoundException {
             Photo Photo = getPhotoById(id);
+            permitted(Photo, "eliminare");
             photoRepository.delete(Photo);
+      }
+
+      // metodo che verifica se lo user loggato ha i permessi di operare sulla foto
+      private void permitted(Photo photo, String string) {
+            if (!photo.getUser().equals(userLogged().orElseThrow())) {
+                  throw new RuntimeException("Non hai il permesso di " + string + " questa foto");
+            }
+      }
+
+      // overload permitted per prendere anche una optional
+      private void permitted(Optional<Photo> photo, String string) {
+            if (!photo.get().getUser().equals(userLogged().orElseThrow())) {
+                  throw new RuntimeException("Non hai il permesso di " + string + " questa foto");
+            }
       }
 }
