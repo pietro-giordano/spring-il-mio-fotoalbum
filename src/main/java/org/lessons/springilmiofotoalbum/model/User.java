@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -21,9 +22,12 @@ public class User {
       @NotNull
       @Size(min = 4)
       private String password;
+      private LocalDateTime createdAt;
 
       @ManyToMany(fetch = FetchType.EAGER)
       private Set<Role> roles;
+
+
 
       public Integer getId() {
             return id;
@@ -47,6 +51,14 @@ public class User {
 
       public void setPassword(String password) {
             this.password = password;
+      }
+
+      public LocalDateTime getCreatedAt() {
+            return createdAt;
+      }
+
+      public void setCreatedAt(LocalDateTime createdAt) {
+            this.createdAt = createdAt;
       }
 
       public Set<Role> getRoles() {

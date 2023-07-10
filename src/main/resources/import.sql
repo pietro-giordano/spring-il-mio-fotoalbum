@@ -23,7 +23,7 @@ INSERT INTO `category_photo`(`category_id`, `photo_id`) VALUES ('1','5')
 INSERT INTO `category_photo`(`category_id`, `photo_id`) VALUES ('3','5')
 INSERT INTO `category_photo`(`category_id`, `photo_id`) VALUES ('4','5')
 
-INSERT INTO `users`(`password`, `username`) VALUES ('{noop}admin','admin')
+INSERT INTO `users`(`password`, `username`, `created_at`) VALUES ('{noop}admin','admin', '2023-07-06 12:07:00')
 INSERT INTO `roles`(`name`) VALUES ('ADMIN')
 INSERT INTO `users_roles`(`user_id`, `roles_id`) VALUES (1, 1)
 

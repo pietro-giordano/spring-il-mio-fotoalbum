@@ -1,5 +1,6 @@
 package org.lessons.springilmiofotoalbum.security;
 
+import org.lessons.springilmiofotoalbum.exceptions.NotUniqueUsernameException;
 import org.lessons.springilmiofotoalbum.model.Role;
 import org.lessons.springilmiofotoalbum.model.User;
 import org.lessons.springilmiofotoalbum.repository.RoleRepository;
@@ -35,12 +36,21 @@ public class DatabaseUserDetailsService implements UserDetailsService {
       }
 
       // metodo che crea nuovo user
-      public User create(User userForm) {
+      public User create(User userForm) throws NotUniqueUsernameException {
+            if (!isUniqueUsername(userForm)) {
+                  throw new NotUniqueUsernameException();
+            }
             User newUser = new User();
             Set<Role> role = roleRepository.findByName("ADMIN");
             newUser.setRoles(role);
             newUser.setUsername(userForm.getUsername());
-            newUser.setPassword(userForm.getPassword());
+            newUser.setPassword("{noop}" + userForm.getPassword());
             return userRepository.save(newUser);
+      }
+
+      // metodo che controlla se username è univoco
+      private boolean isUniqueUsername(User userForm) {
+            Optional<User> result = userRepository.findByUsername(userForm.getUsername());
+            return result.isEmpty();
       }
 }
