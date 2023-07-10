@@ -19,7 +19,7 @@ public class User {
       @Size(min = 2, max = 20)
       private String username;
       @NotNull
-      @Size(min = 4, max = 10)
+      @Size(min = 4)
       private String password;
 
       @ManyToMany(fetch = FetchType.EAGER)

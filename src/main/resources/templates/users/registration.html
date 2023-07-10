@@ -15,7 +15,7 @@
                         <label class="col-4 col-form-label">Username: </label>
                         <div class="col-8">
                               <input type="text" th:field="*{username}" class="form-control"
-                                     required minlength="2" maxlength="20" th:errorClass="is-invalid"/>
+                                     th:errorClass="is-invalid"/>
                         </div>
                         <div th:if="${#fields.hasErrors('username')}" class="invalid-feedback">
                               <ul>
@@ -28,7 +28,7 @@
                         <label class="col-4 col-form-label">Password: </label>
                         <div class="col-8">
                               <input type="password" th:field="*{password}" class="form-control"
-                                     required minlength="4" maxlength="10" th:errorClass="is-invalid"/>
+                                     th:errorClass="is-invalid"/>
                         </div>
                         <div th:if="${#fields.hasErrors('password')}" class="invalid-feedback">
                               <ul>
