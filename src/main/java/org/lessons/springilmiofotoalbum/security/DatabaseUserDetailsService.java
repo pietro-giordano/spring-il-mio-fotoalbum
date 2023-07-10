@@ -27,4 +27,13 @@ public class DatabaseUserDetailsService implements UserDetailsService {
                   // altrimenti lancio eccezione apposita
             } else throw new UsernameNotFoundException("Username " + username + " not found");
       }
+
+      // metodo che crea nuovo user
+      public User create(User userForm) {
+            User newUser = new User();
+            newUser.setRoles(userForm.getRoles());
+            newUser.setUsername(userForm.getUsername());
+            newUser.setPassword("{noob}" + userForm.getPassword());
+            return userRepository.save(userForm);
+      }
 }

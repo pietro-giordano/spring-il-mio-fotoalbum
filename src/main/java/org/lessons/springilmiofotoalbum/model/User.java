@@ -2,6 +2,7 @@ package org.lessons.springilmiofotoalbum.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.Set;
 
@@ -15,8 +16,10 @@ public class User {
 
       @NotNull
       @Column(unique = true)
+      @Size(min = 2, max = 20)
       private String username;
       @NotNull
+      @Size(min = 4, max = 10)
       private String password;
 
       @ManyToMany(fetch = FetchType.EAGER)

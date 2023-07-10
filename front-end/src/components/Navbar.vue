@@ -22,6 +22,9 @@ export default {
                               <li class="nav-item">
                                     <a class="nav-link" href="http://localhost:8080">Area riservata</a>
                               </li>
+                              <li class="nav-item">
+                                    <a class="nav-link" href="http://localhost:8080/register">Registrati</a>
+                              </li>
                         </ul>
                   </div>
             </div>
