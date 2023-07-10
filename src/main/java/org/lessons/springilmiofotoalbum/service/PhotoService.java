@@ -3,8 +3,12 @@ package org.lessons.springilmiofotoalbum.service;
 import org.lessons.springilmiofotoalbum.dto.PhotoDto;
 import org.lessons.springilmiofotoalbum.exceptions.PhotoNotFoundException;
 import org.lessons.springilmiofotoalbum.model.Photo;
+import org.lessons.springilmiofotoalbum.model.User;
 import org.lessons.springilmiofotoalbum.repository.PhotoRepository;
+import org.lessons.springilmiofotoalbum.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +23,9 @@ public class PhotoService {
       @Autowired
       private PhotoRepository photoRepository;
 
+      @Autowired
+      private UserRepository userRepository;
+
       // metodo che restituisce lista foto filtrate per titolo
       public List<Photo> getPhotos(Optional<String> search) {
             if (search.isEmpty()) {
@@ -26,6 +33,21 @@ public class PhotoService {
             } else {
                   return photoRepository.findByTitleContainingIgnoreCase(search.get());
             }
+      }
+
+      // metodo che recupera lista foto dell'utente loggato filtrate per titolo
+      public List<Photo> getPhotosOfLoggedUser(Optional<String> search) {
+            if (search.isEmpty()) {
+                  return photoRepository.findByUserId(userId().get().getId());
+            } else {
+                  return photoRepository.findByUserIdAndTitleContainingIgnoreCase(userId().get().getId(), search.get());
+            }
+      }
+
+      // recupero id user da username preso tramite authentication
+      private Optional<User> userId() {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            return userRepository.findByUsername(authentication.getName());
       }
 
       // metodo che restituisce lista foto filtrate per visibilità e per titolo

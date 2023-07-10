@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,7 +28,8 @@ public class User {
       @ManyToMany(fetch = FetchType.EAGER)
       private Set<Role> roles;
 
-
+      @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE})
+      private List<Photo> photos;
 
       public Integer getId() {
             return id;
@@ -67,5 +69,13 @@ public class User {
 
       public void setRoles(Set<Role> roles) {
             this.roles = roles;
+      }
+
+      public List<Photo> getPhotos() {
+            return photos;
+      }
+
+      public void setPhotos(List<Photo> photos) {
+            this.photos = photos;
       }
 }

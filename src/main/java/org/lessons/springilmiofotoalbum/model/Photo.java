@@ -1,5 +1,6 @@
 package org.lessons.springilmiofotoalbum.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -24,6 +25,11 @@ public class Photo {
       private byte[] url;
       private Boolean visible;
       private LocalDateTime createdAt;
+
+      @JsonIgnore
+      @ManyToOne
+      @JoinColumn(name = "user_id", nullable = false)
+      private User user;
 
       @ManyToMany
       @JoinTable(name = "category_photo", joinColumns = @JoinColumn(name = "photo_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
@@ -75,6 +81,14 @@ public class Photo {
 
       public void setCreatedAt(LocalDateTime createdAt) {
             this.createdAt = createdAt;
+      }
+
+      public User getUser() {
+            return user;
+      }
+
+      public void setUser(User user) {
+            this.user = user;
       }
 
       public List<Category> getCategories() {

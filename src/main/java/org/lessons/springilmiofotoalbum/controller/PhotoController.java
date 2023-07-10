@@ -5,7 +5,6 @@ import org.lessons.springilmiofotoalbum.dto.PhotoDto;
 import org.lessons.springilmiofotoalbum.exceptions.PhotoNotFoundException;
 import org.lessons.springilmiofotoalbum.messages.Alert;
 import org.lessons.springilmiofotoalbum.messages.AlertType;
-import org.lessons.springilmiofotoalbum.model.Photo;
 import org.lessons.springilmiofotoalbum.service.CategoryService;
 import org.lessons.springilmiofotoalbum.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +29,17 @@ public class PhotoController {
       private CategoryService categoryService;
 
       // INDEX
+      /*
       @GetMapping
       public String index(Model model, @RequestParam(name = "keyword", required = false) Optional<String> search) {
             model.addAttribute("photos", photoService.getPhotos(search));
+            model.addAttribute("categories", categoryService.getCategories());
+            return "/photos/index";
+      }
+      */
+      @GetMapping
+      public String indexOfLoggedUser(Model model, @RequestParam(name = "keyword", required = false) Optional<String> search) {
+            model.addAttribute("photos", photoService.getPhotosOfLoggedUser(search));
             model.addAttribute("categories", categoryService.getCategories());
             return "/photos/index";
       }
