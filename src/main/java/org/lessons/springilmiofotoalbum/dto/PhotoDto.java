@@ -1,8 +1,8 @@
 package org.lessons.springilmiofotoalbum.dto;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.lessons.springilmiofotoalbum.model.Category;
+import org.lessons.springilmiofotoalbum.model.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
@@ -18,6 +18,7 @@ public class PhotoDto {
       private Boolean visible;
       private LocalDateTime createdAt;
       private List<Category> categories;
+      private User user;
 
       public Integer getId() {
             return id;
@@ -73,5 +74,13 @@ public class PhotoDto {
 
       public void setCategories(List<Category> categories) {
             this.categories = categories;
+      }
+
+      public User getUser() {
+            return user;
+      }
+
+      public void setUser(User user) {
+            this.user = user;
       }
 }

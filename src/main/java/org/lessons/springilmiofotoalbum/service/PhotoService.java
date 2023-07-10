@@ -59,10 +59,15 @@ public class PhotoService {
             }
       }
 
+      // metodo che restituisce dettagli foto
+      public Photo show(Integer id) {
+            permitted(getPhotoById(id), "vedere");
+            return getPhotoById(id);
+      }
+
       // metodo che ritorna foto cercata per id
       public Photo getPhotoById(Integer id) throws PhotoNotFoundException {
             Optional<Photo> photo = photoRepository.findById(id);
-            permitted(photo, "vedere");
             // se non esiste lancia eccezione
             if (photo.isEmpty()) {
                   throw new PhotoNotFoundException();

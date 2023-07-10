@@ -48,7 +48,7 @@ public class PhotoController {
       @GetMapping("/{id}")
       public String show(Model model, @PathVariable Integer id) {
             try {
-                  model.addAttribute("photo", photoService.getPhotoById(id));
+                  model.addAttribute("photo", photoService.show(id));
                   return "/photos/show";
             } catch (PhotoNotFoundException e) {
                   throw new ResponseStatusException(HttpStatus.NOT_FOUND);
